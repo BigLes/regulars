@@ -3,13 +3,15 @@
  */
 'use strict';
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpack = require('webpack');
+const express       = require('express');
+const bodyParser    = require('body-parser');
+const webpack       = require('webpack');
+const config        = require('config');
+const DB            = require('./backend/database');
 const webpackConfig = require('./webpack.config.js');
-let app = express();
+const webpackDevMiddleware = require('webpack-dev-middleware');
 
+const app = express();
 const compiler = webpack(webpackConfig);
 
 app.use(webpackDevMiddleware(compiler, {
@@ -25,8 +27,7 @@ app.use(express.static(__dirname + '/www'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-var server = app.listen(3003, 'localhost', function() {
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log('Example app listening at http://%s:%s', host, port);
+const server = app.listen(config.server.port, config.server.host, function() {
+    const db = new DB();
+    console.log('Example app listening at http://%s:%s', server.address().address, server.address().port);
 });

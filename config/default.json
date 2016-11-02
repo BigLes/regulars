@@ -1,0 +1,14 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 3003
+  },
+  "db": {
+    "dbName": "regulars",
+    "dbLogin": "root",
+    "dbPass": "root",
+    "dbHost": "localhost",
+    "dialect": "mysql",
+    "port": 3306
+  }
+}
