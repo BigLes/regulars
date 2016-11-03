@@ -6,7 +6,7 @@
 const config    = require('config');
 const Sequelize = require('sequelize');
 const Umzug     = require('umzug');
-const Models    = require('./models');
+const Models    = require('./models/Models');
 
 const applyMigrations = (sequelize) => {
     const umzug = new Umzug({

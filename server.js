@@ -7,7 +7,7 @@ const express       = require('express');
 const bodyParser    = require('body-parser');
 const webpack       = require('webpack');
 const config        = require('config');
-const DB            = require('./backend/database');
+const DB            = require('./backend/database/DataBase');
 const webpackConfig = require('./webpack.config.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
