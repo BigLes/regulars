@@ -6,21 +6,21 @@
 const hash = require('../../../utils/hash');
 
 const __encryptUser = user => {
-    user.login = hash.encrypt(user.login);
-    user.password = hash.encrypt(user.password);
-    user.email = hash.encrypt(user.email);
+    if (user.login)     user.login = hash.encrypt(user.login);
+    if (user.password)  user.password = hash.encrypt(user.password);
+    if (user.email)     user.email = hash.encrypt(user.email);
     return user;
 };
 
 const __decryptUser = user => {
-    user.login = hash.decrypt(user.login);
-    user.password = hash.decrypt(user.password);
-    user.email = hash.decrypt(user.email);
+    if (user.login)     user.login = hash.decrypt(user.login);
+    if (user.password)  user.password = hash.decrypt(user.password);
+    if (user.email)     user.email = hash.decrypt(user.email);
     return user;
 };
 
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('users', {
+    return sequelize.define('user', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
