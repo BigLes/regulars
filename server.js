@@ -1,5 +1,5 @@
 /**
- * Created by Oleksandr Lisovyk on 1.11.2016.
+ * Created by Oleksandr Lisovyk on 01.11.2016.
  */
 'use strict';
 
@@ -27,7 +27,18 @@ app.use(express.static(__dirname + '/www'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-const server = app.listen(config.server.port, config.server.host, function() {
-    const db = new DB();
-    console.log('Example app listening at http://%s:%s', server.address().address, server.address().port);
-});
+const __createDB = () => {
+    return DB();
+};
+
+const __createSrv = () => {
+    return new Promise((resolve, reject) => {
+        const server = app.listen(config.server.port, config.server.host, (err) => err ? reject(err) : resolve(server));
+    });
+};
+
+Promise.resolve()
+    .then(() => __createDB())
+    .then(() => __createSrv())
+    .then(server => console.log(`Example app listening at http: ${server.address().address}:${server.address().port}`))
+    .catch(error => console.log(`Error starting the server. ${error.message ? error.message : error}`));

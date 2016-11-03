@@ -3,15 +3,10 @@
  */
 'use strict';
 
-const config = require('config');
+const config    = require('config');
 const Sequelize = require('sequelize');
-const Umzug = require('umzug');
-
-const sequelize = new Sequelize(config.db.dbName, config.db.dbLogin, config.db.dbPass, {
-    host: config.db.host,
-    port: config.db.port,
-    dialect: config.db.dialect
-});
+const Umzug     = require('umzug');
+const Models    = require('./models');
 
 const applyMigrations = (sequelize) => {
     const umzug = new Umzug({
@@ -29,6 +24,22 @@ const applyMigrations = (sequelize) => {
     return umzug.up();
 };
 
+const defineModels = (sequelize, DataTypes) => {
+    return Models(sequelize, DataTypes);
+};
+
+/**
+ * @returns {Promise.<{models: *, sequelize}>}
+ */
 module.exports = function () {
-    applyMigrations(sequelize);
+    const sequelize = new Sequelize(config.db.dbName, config.db.dbLogin, config.db.dbPass, {
+        host: config.db.host,
+        port: config.db.port,
+        dialect: config.db.dialect
+    });
+
+    return Promise.resolve()
+        .then(() => applyMigrations(sequelize))
+        .then(() => defineModels(sequelize, Sequelize.DataTypes))
+        .then(models => Promise.resolve({models, sequelize}));
 };
