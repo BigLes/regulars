@@ -10,5 +10,9 @@
     "dbHost": "localhost",
     "dialect": "mysql",
     "port": 3306
+  },
+  "crypto": {
+    "algorithm": "aes-256-ctr",
+    "secret": "sp4Vj8vT"
   }
 }

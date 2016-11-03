@@ -5,6 +5,6 @@
 
 module.exports = (sequelize, DataTypes) => {
     return {
-        User: require('./User')(sequelize, DataTypes)
+        user: require('./user')(sequelize, DataTypes)
     };
 };

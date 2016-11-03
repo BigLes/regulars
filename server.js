@@ -31,14 +31,16 @@ const __createDB = () => {
     return DB();
 };
 
-const __createSrv = () => {
+const __createSrv = db => {
     return new Promise((resolve, reject) => {
-        const server = app.listen(config.server.port, config.server.host, (err) => err ? reject(err) : resolve(server));
+        const server = app.listen(config.server.port, config.server.host, (err) => err ? reject(err) : resolve({server, db}));
     });
 };
 
 Promise.resolve()
     .then(() => __createDB())
-    .then(() => __createSrv())
-    .then(server => console.log(`Example app listening at http: ${server.address().address}:${server.address().port}`))
+    .then(db => __createSrv(db))
+    .then(({server, db}) => {
+        console.log(`Example app listening at http: ${server.address().address}:${server.address().port}`);
+    })
     .catch(error => console.log(`Error starting the server. ${error.message ? error.message : error}`));
