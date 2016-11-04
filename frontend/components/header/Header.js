@@ -3,12 +3,14 @@
  */
 'use strict';
 
-import React from 'react';
+import React    from 'react';
+import styles   from './style'
+import {css}    from 'aphrodite';
 
 const Header = React.createClass({
     render: function() {
         return (
-            <header>
+            <header className={css(styles.header)}>
                 <nav></nav>
             </header>
         );

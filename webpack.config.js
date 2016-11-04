@@ -13,13 +13,11 @@ var config = {
         filename: 'bundle.js',
     },
     module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: ['babel-loader'],
-            },
-        ],
+        loaders: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loaders: ['babel-loader'],
+        }],
     },
     resolveLoader: {
         root: [

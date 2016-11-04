@@ -4,7 +4,7 @@
 'use strict';
 
 import Dispatcher   from '../dispatcher/Dispatcher';
-import Constants    from '../constants/Constants';
+import Constants    from '../constants/constants';
 import {Store} from 'flux/utils';
 
 class UserStore extends Store {}
