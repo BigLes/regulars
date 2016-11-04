@@ -8,8 +8,9 @@ import constants    from '../../constants/styles';
 
 export default StyleSheet.create({
     header: {
-        height: '35px',
-        width: '100%',
-        borderBottom: `1px solid ${constants.lightGrey}`
+        fontSize: 'larger',
+        borderBottom: `1px solid ${constants.lightGrey}`,
+        color: constants.darkGrey,
+        textAlign: 'center'
     }
 });

@@ -3,15 +3,21 @@
  */
 'use strict';
 
-import React    from 'react';
-import styles   from './style'
-import {css}    from 'aphrodite';
+import React        from 'react';
+import styles       from './style'
+import {css}        from 'aphrodite';
+import UserButton   from '../userButton/UserButton';
+import classNames   from 'classnames';
 
 const Header = React.createClass({
-    render: function() {
+    render() {
         return (
-            <header className={css(styles.header)}>
-                <nav></nav>
+            <header className={classNames(css(styles.header), 'row')}>
+                <nav className="row">
+                    <div className="col-sm-2">Banner</div>
+                    <div className="col-sm-8">Main</div>
+                    <UserButton className="col-sm-2" />
+                </nav>
             </header>
         );
     }

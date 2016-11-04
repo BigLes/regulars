@@ -8,7 +8,11 @@ import Header   from '../../components/header/Header';
 
 const ListPage = React.createClass({
     render() {
-        return (<div><Header></Header></div>);
+        return (
+            <div>
+                <Header></Header>
+            </div>
+        );
     }
 });
 
