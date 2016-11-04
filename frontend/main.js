@@ -3,7 +3,16 @@
  */
 'use strict';
 
-import React    from 'react';
-import ReactDOM from 'react-dom';
+import React        from 'react';
+import ReactDOM     from 'react-dom';
+import PuzzlePage   from './pages/puzzle/PuzzlePage';
+import {Router, Route, browserHistory} from 'react-router';
 
-document.addEventListener('DOMContentLoaded', () => {});
+document.addEventListener('DOMContentLoaded', () => {
+    ReactDOM.render(
+        <Router history={browserHistory}>
+            <Route path="/" component={PuzzlePage} />
+        </Router>,
+        document.getElementById('mount')
+    );
+});
