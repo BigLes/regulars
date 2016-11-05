@@ -24,8 +24,7 @@ app.use(webpackDevMiddleware(compiler, {
     historyApiFallback: true,
 }));
 app.use(express.static(__dirname + '/www'));
-app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
-app.use('/font-awesome', express.static(__dirname + '/node_modules/font-awesome/css'));
+app.use('/font-awesome', express.static(__dirname + '/node_modules/font-awesome'));
 app.use('/fonts', express.static(__dirname + '/node_modules/font-awesome/fonts'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());

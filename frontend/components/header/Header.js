@@ -4,7 +4,7 @@
 'use strict';
 
 import React        from 'react';
-import styles       from './style'
+import style        from './style'
 import {css}        from 'aphrodite';
 import UserButton   from '../userButton/UserButton';
 import classNames   from 'classnames';
@@ -12,11 +12,11 @@ import classNames   from 'classnames';
 const Header = React.createClass({
     render() {
         return (
-            <header className={classNames(css(styles.header), 'row')}>
-                <nav className="row">
-                    <div className="col-sm-2">Banner</div>
-                    <div className="col-sm-8">Main</div>
-                    <UserButton className="col-sm-2" />
+            <header className={classNames(css(style.header))}>
+                <nav>
+                    <div className={classNames(css(style.banner))}>Banner</div>
+                    <div className={classNames(css(style.buttons))}>Main</div>
+                    <UserButton className={classNames(css(style.login))}/>
                 </nav>
             </header>
         );
