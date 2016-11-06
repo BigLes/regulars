@@ -27,7 +27,6 @@
     "express": "^4.14.0",
     "flux": "^2.1.1",
     "font-awesome": "^4.7.0",
-    "keymirror": "^0.1.1",
     "mysql": "^2.11.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
