@@ -5,10 +5,10 @@
 
 module.exports = {
     activate(req, res) {
-        return res.json({
+        res.json({
             login: 'OK',
             token: 'OK'
-        }).status(200).end();
+        });
     },
     get(req, res) {
         return res.sendStatus(200);
