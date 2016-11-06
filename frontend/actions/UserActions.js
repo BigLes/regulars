@@ -3,9 +3,22 @@
  */
 'use strict';
 
+import UserApi          from '../api/UserApi';
+import Constants        from '../constants/Constants';
+import Dispatcher       from '../dispatcher/Dispatcher';
+import LoaderActions    from './LoaderActions';
+
 const UserActions = {
 
-    get(id) {},
+    login(user) {
+        //TODO: add error handling
+        UserApi.login(user)
+            .then(res => {
+                Dispatcher.dispatch({actionType: Constants.LOGIN_DONE, res});
+                //TODO: create separate component for fetching and move turnOff to one place
+                LoaderActions.turnOff();
+            })
+    },
 
     save() {},
 

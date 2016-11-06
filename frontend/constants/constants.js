@@ -5,5 +5,6 @@
 
 export default {
     LOADER_ON: 'LOADER_ON',
-    LOADER_OFF: 'LOADER_OFF'
+    LOADER_OFF: 'LOADER_OFF',
+    LOGIN_DONE: 'LOGIN_DONE'
 };

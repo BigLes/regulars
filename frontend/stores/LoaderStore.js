@@ -7,17 +7,17 @@ import Constants    from '../constants/Constants';
 import Dispatcher   from '../dispatcher/Dispatcher';
 import {Store}      from 'flux/utils';
 
-let __display = 'none !important';
+let __display = 'none';
 
 class LoaderStore extends Store {
 
     __onDispatch(action) {
         switch(action.actionType) {
             case Constants.LOADER_ON: {
-                __display = 'flex !important'
+                __display = 'flex';
             } break;
             case Constants.LOADER_OFF: {
-                __display = 'none !important';
+                __display = 'none';
             } break;
         }
         this.__emitChange();

@@ -7,6 +7,8 @@ import React, {PropTypes}   from 'react';
 import style                from './style'
 import {css}                from 'aphrodite';
 import classNames           from 'classnames';
+import LoaderActions        from '../../actions/LoaderActions';
+import UserActions          from '../../actions/UserActions';
 
 const __emptyUser = () => {
     return {
@@ -40,6 +42,11 @@ class UserButton extends React.Component {
         this.setState(Object.assign(this.state, {active: !this.state.active}));
     }
 
+    activateUser() {
+        LoaderActions.turnOn();
+        UserActions.login(this.state.user);
+    }
+
     renderLoginForm() {
         return (
             <div className={classNames(css(style.loginForm))}>
@@ -48,7 +55,7 @@ class UserButton extends React.Component {
                 {!this.state.login ? <input onChange={this.fieldChange.bind(this)} className={classNames(css(style.input, !this.state.user.email ? null :this.props.rules.email.test(this.state.user.email) ? style.good : style.bad))} name="email" type="text" placeholder="Email" value={this.state.user.email} /> : null}
                 <input onChange={this.fieldChange.bind(this)} className={classNames(css(style.input, !this.state.user.password ? null : this.props.rules.password.test(this.state.user.password) ? style.good : style.bad))} name="password" type="password" placeholder="Password" value={this.state.user.password} />
                 {!this.state.login ? <input onChange={this.fieldChange.bind(this)} className={this.passwordClassNames.call(this)} name="password2" type="password" placeholder="Re-Password" value={this.state.user.password2} /> : null}
-                <input onClick={this.toggle.bind(this)} className={classNames(css(style.input, style.button))} name="type" type="button" value="SUBMIT" />
+                <input onClick={this.activateUser.bind(this)} className={classNames(css(style.input, style.button))} name="type" type="button" value="SUBMIT" />
             </div>
         )
     }
@@ -83,6 +90,7 @@ UserButton.propTypes = {
     className: PropTypes.string
 };
 
+//TODO: change password regexp
 UserButton.defaultProps = {
     rules: {
         login: new RegExp('[\\w]{3,25}'),
