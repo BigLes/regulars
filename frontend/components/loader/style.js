@@ -8,9 +8,14 @@ import {StyleSheet} from 'aphrodite';
 export default StyleSheet.create({
     loader: {
         height: '100%',
+        width: '100%',
         textAlign: 'center',
         userSelect: 'none',
-        backgroundColor: 'rgba(255, 255, 255, 0.15)'
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '-26px'
     },
     svg: {
         width: '100px',

@@ -22,7 +22,7 @@ class UserButton extends React.Component {
         super(props);
         this.state = {
             active: false,
-            login: false,
+            login: true,
         };
         this.state.user = __emptyUser();
     }

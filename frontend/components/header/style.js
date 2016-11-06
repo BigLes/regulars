@@ -13,7 +13,10 @@ export default StyleSheet.create({
         height: '25px',
         color: constants.darkGrey,
         textAlign: 'center',
-        userSelect: 'none'
+        userSelect: 'none',
+        position: 'absolute',
+        top: 0,
+        width: '100%'
     },
     banner: {
         width: '25%',
