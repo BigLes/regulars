@@ -12,7 +12,7 @@ export default StyleSheet.create({
         textAlign: 'center',
         userSelect: 'none',
         backgroundColor: 'rgba(255, 255, 255, 0.15)',
-        display: 'flex',
+        display: 'none',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '-26px'
