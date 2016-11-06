@@ -3,6 +3,7 @@
  */
 'use strict';
 
-import keyMirror from 'keymirror';
-
-export default keyMirror({});
+export default {
+    LOADER_ON: 'LOADER_ON',
+    LOADER_OFF: 'LOADER_OFF'
+};

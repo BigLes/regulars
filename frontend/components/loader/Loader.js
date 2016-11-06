@@ -7,12 +7,13 @@ import React        from 'react';
 import style        from './style'
 import {css}        from 'aphrodite';
 import classNames   from 'classnames';
+import LoaderStore  from '../../stores/LoaderStore';
 
 class Loader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            display: 'none'
+            display: LoaderStore.getValue()
         }
     }
 
@@ -27,6 +28,14 @@ class Loader extends React.Component {
                 </svg>
             </div>
         );
+    }
+
+    componentDidMount() {
+        LoaderStore.addListener(this.__onChange.bind(this));
+    }
+
+    __onChange() {
+        this.setState(Object.assign(this.state, {display: LoaderStore.getValue()}));
     }
 }
 
