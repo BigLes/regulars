@@ -8,7 +8,7 @@ const userController = require('../controllers/userController');
 
 router.route('/users')
     .get(userController.get)
-    .post(userController.create);
+    .post(userController.activate);
 
 router.route('/users/:id')
     .get(userController.get)

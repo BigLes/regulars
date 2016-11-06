@@ -11,9 +11,16 @@ const DB            = require('./backend/database/DataBase');
 const webpackConfig = require('./webpack.config.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
+const userRoutes    = require('./backend/routes/userRoutes');
+
 const app = express();
 const compiler = webpack(webpackConfig);
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(webpackDevMiddleware(compiler, {
     hot: true,
     filename: 'bundle.js',
@@ -28,6 +35,8 @@ app.use('/font-awesome', express.static(__dirname + '/node_modules/font-awesome'
 app.use('/fonts', express.static(__dirname + '/node_modules/font-awesome/fonts'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+app.use('/api', userRoutes);
 
 const __createDB = () => {
     return DB();

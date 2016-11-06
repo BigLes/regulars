@@ -4,8 +4,11 @@
 'use strict';
 
 module.exports = {
-    create(req, res) {
-        return res.sendStatus(200);
+    activate(req, res) {
+        return res.json({
+            login: 'OK',
+            token: 'OK'
+        });
     },
     get(req, res) {
         return res.sendStatus(200);
