@@ -39,19 +39,19 @@ app.use(bodyParser.json());
 app.use('/api', userRoutes);
 
 const __createDB = () => {
-    return DB();
+    return DB.applyMigrations();
 };
 
-const __createSrv = db => {
+const __createSrv = () => {
     return new Promise((resolve, reject) => {
-        const server = app.listen(config.server.port, config.server.host, (err) => err ? reject(err) : resolve({server, db}));
+        const server = app.listen(config.server.port, config.server.host, (err) => err ? reject(err) : resolve(server));
     });
 };
 
 Promise.resolve()
     .then(() => __createDB())
-    .then(db => __createSrv(db))
-    .then(({server, db}) => {
+    .then(() => __createSrv())
+    .then(server => {
         console.log(`Example app listening at http: ${server.address().address}:${server.address().port}`);
     })
     .catch(error => console.log(`Error starting the server. ${error.message ? error.message : error}`));

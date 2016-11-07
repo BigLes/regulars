@@ -8,12 +8,23 @@ const Sequelize = require('sequelize');
 const Umzug     = require('umzug');
 const Models    = require('./models/Models');
 
-const applyMigrations = (sequelize) => {
+const __sequelize = new Sequelize(config.db.dbName, config.db.dbLogin, config.db.dbPass, {
+    host: config.db.host,
+    port: config.db.port,
+    dialect: config.db.dialect
+});
+
+/**
+ * Applying all needed migrations
+ * @returns {*|Promise}
+ * @private
+ */
+const __applyMigrations = () => {
     const umzug = new Umzug({
         storage: 'sequelize',
-        storageOptions: {sequelize},
+        storageOptions: {sequelize: __sequelize},
         migrations: {
-            params: [sequelize.getQueryInterface(), sequelize.constructor, () => {
+            params: [__sequelize.getQueryInterface(), __sequelize.constructor, () => {
                 throw new Error('Migration tried to use old style "done" callback. Please upgrade to "umzug" and return a promise instead.');
             }],
             pattern: /\.js$/,
@@ -24,22 +35,12 @@ const applyMigrations = (sequelize) => {
     return umzug.up();
 };
 
-const defineModels = (sequelize, DataTypes) => {
-    return Models(sequelize, DataTypes);
-};
+module.exports = {
+    applyMigrations: () => {
+        return __applyMigrations();
+    },
 
-/**
- * @returns {Promise.<{models: *, sequelize}>}
- */
-module.exports = function () {
-    const sequelize = new Sequelize(config.db.dbName, config.db.dbLogin, config.db.dbPass, {
-        host: config.db.host,
-        port: config.db.port,
-        dialect: config.db.dialect
-    });
+    sequelize: __sequelize,
 
-    return Promise.resolve()
-        .then(() => applyMigrations(sequelize))
-        .then(() => defineModels(sequelize, Sequelize.DataTypes))
-        .then(models => Promise.resolve({models, sequelize}));
+    models: Models(__sequelize, Sequelize.DataTypes)
 };

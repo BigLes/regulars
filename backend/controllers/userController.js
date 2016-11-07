@@ -3,8 +3,11 @@
  */
 'use strict';
 
+const db = require('../database/DataBase');
+
 module.exports = {
     activate(req, res) {
+        db.models.findConfigs()
         res.json({
             login: 'OK',
             token: 'OK'
