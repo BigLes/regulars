@@ -43,8 +43,23 @@ class UserButton extends React.Component {
     }
 
     activateUser() {
-        LoaderActions.turnOn();
-        UserActions.login(this.state.login ? {login: this.state.user.login, password: this.state.user.password} : this.state.user);
+        const rules = this.props.rules;
+        const user = this.state.user;
+        if (rules.login.test(user.login) && rules.password.test(user.password)) {
+            if (this.state.login) {
+                this.toggle();
+                LoaderActions.turnOn();
+                UserActions.login({login: this.state.user.login, password: this.state.user.password});
+            } else if (rules.email.test(user.email) && rules.password.test(user.password2) && (user.password === user.password2)) {
+                this.toggle();
+                LoaderActions.turnOn();
+                UserActions.login(this.state.user);
+            } else {
+                //TODO: show error
+            }
+        } else {
+            //TODO: show error
+        }
     }
 
     renderLoginForm() {

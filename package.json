@@ -29,6 +29,7 @@
     "font-awesome": "^4.7.0",
     "jsonwebtoken": "^7.1.9",
     "mysql": "^2.11.1",
+    "nodemailer": "^2.6.4",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^2.8.1",
