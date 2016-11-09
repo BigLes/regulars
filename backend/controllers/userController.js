@@ -3,10 +3,11 @@
  */
 'use strict';
 
+const config    = require('config');
+const jwt       = require('jsonwebtoken');
 const db        = require('../database/DataBase');
 const messages  = require('../constants/messages');
-
-const hash = require('../../utils/hash');
+const hash      = require('../../utils/hash');
 
 const __findUser = (login, password) => {
     return db.models.user.findOne({
@@ -15,19 +16,26 @@ const __findUser = (login, password) => {
     });
 };
 
-const __loginUser = (user) => {
+const __identifyUser = (user) => {
     return __findUser(user.login, user.password)
-        .then(user => {
-            return user ? Promise.resolve(user) : Promise.reject()
-        });
+        .then(user => user ? Promise.resolve(user) : Promise.reject());
+};
+
+const __authenticateUser = (user) => {
+    delete user.password;
+    user.token = jwt.sign(user, config.jwtSecret, config.jwt);
+    return Promise.resolve(user);
 };
 
 module.exports = {
     activate(req, res) {
         if (!req.body.email) {
-            __loginUser(req.body)
+            Promise.resolve()
+                .then(() => __identifyUser(req.body))
+                .then(user => __authenticateUser(req.body))
                 .then(data => res.json(data))
-                .catch(() => {
+                .catch(error => {
+                    console.log(error);
                     res.status(409).send({error: messages.BAD_LOGIN});
                 });
         } else {

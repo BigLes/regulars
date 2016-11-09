@@ -14,5 +14,10 @@
   "crypto": {
     "algorithm": "aes-256-ctr",
     "secret": "sp4Vj8vT"
-  }
+  },
+  "jwt": {
+    "algorithm": "HS256",
+    "expiresIn": "30 days"
+  },
+  "jwtSecret": "sp4Vj8vT"
 }
