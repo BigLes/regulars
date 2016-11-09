@@ -9,16 +9,18 @@ const db        = require('../database/DataBase');
 const messages  = require('../constants/messages');
 const hash      = require('../../utils/hash');
 
+const __identifyUser = (user) => {
+    return __findUser(user.login, user.password)
+        .then(user => {
+            return user ? user.dataValues : Promise.reject();
+        });
+};
+
 const __findUser = (login, password) => {
     return db.models.user.findOne({
         attributes: ['id', 'login', 'password'],
         where: {login, password}
-    });
-};
-
-const __identifyUser = (user) => {
-    return __findUser(user.login, user.password)
-        .then(user => user ? Promise.resolve(user) : Promise.reject());
+    })
 };
 
 const __authenticateUser = (user) => {
@@ -32,7 +34,7 @@ module.exports = {
         if (!req.body.email) {
             Promise.resolve()
                 .then(() => __identifyUser(req.body))
-                .then(user => __authenticateUser(req.body))
+                .then(user => __authenticateUser(user))
                 .then(data => res.json(data))
                 .catch(error => {
                     console.log(error);
