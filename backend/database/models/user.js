@@ -9,14 +9,20 @@ const __encryptUser = user => {
     if (user.login)     user.login = hash.encrypt(user.login);
     if (user.password)  user.password = hash.encrypt(user.password);
     if (user.email)     user.email = hash.encrypt(user.email);
+
+    if (user.where) {
+        if (user.where.login)     user.where.login = hash.encrypt(user.where.login);
+        if (user.where.password)  user.where.password = hash.encrypt(user.where.password);
+        if (user.where.email)     user.where.email = hash.encrypt(user.where.email);
+    }
     return user;
 };
 
-const __decryptUser = user => {
-    if (user.login)     user.login = hash.decrypt(user.login);
-    if (user.password)  user.password = hash.decrypt(user.password);
-    if (user.email)     user.email = hash.decrypt(user.email);
-    return user;
+const __decryptUser = data => {
+    if (data.login)     data.login = hash.decrypt(data.login);
+    if (data.password)  data.password = hash.decrypt(data.password);
+    if (data.email)     data.email = hash.decrypt(data.email);
+    return data;
 };
 
 module.exports = (sequelize, DataTypes) => {
