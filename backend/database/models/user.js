@@ -41,6 +41,14 @@ module.exports = (sequelize, DataTypes) => {
         login: DataTypes.STRING,
         password: DataTypes.STRING,
         email: DataTypes.STRING,
+        active: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        admin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
     }, {
         hooks: {
             beforeCreate:   user => __encryptUser(user),
