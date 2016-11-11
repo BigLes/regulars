@@ -7,7 +7,7 @@ const config    = require('config');
 const jwt       = require('jsonwebtoken');
 const db        = require('../database/DataBase');
 const messages  = require('../constants/messages');
-const hash      = require('../../utils/hash');
+const hash      = require('../utils/hash');
 const mailer    = require('../utils/mailer');
 
 const __identifyUser = (user) => {
@@ -56,7 +56,7 @@ module.exports = {
         } else {
             Promise.resolve()
                 .then(() => __createUser(req.body))
-                // .then(user => __sendEmail(user))
+                .then(user => __sendEmail(user))
                 .then(data => res.json(data))
                 .catch(error => {
                     console.log(error);

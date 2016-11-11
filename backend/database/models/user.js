@@ -3,7 +3,7 @@
  */
 'use strict';
 
-const hash = require('../../../utils/hash');
+const hash = require('../../utils/hash');
 
 const __encryptUser = user => {
     if (user.login)     user.login = hash.encrypt(user.login);

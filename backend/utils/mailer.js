@@ -6,7 +6,7 @@
 const nodemailer    = require('nodemailer');
 const fs            = require('fs');
 
-const transporter = nodemailer.createTransport(fs.readFileSync('backend/utils/connectionString.txt').toString());
+const transporter = nodemailer.createTransport(JSON.parse(fs.readFileSync('backend/utils/connectionString.txt').toString()));
 
 module.exports = {
     sendInvitationEmail: (user) => {
