@@ -8,6 +8,7 @@ const jwt       = require('jsonwebtoken');
 const db        = require('../database/DataBase');
 const messages  = require('../constants/messages');
 const hash      = require('../../utils/hash');
+const mailer    = require('../utils/mailer');
 
 const __identifyUser = (user) => {
     return __findUser(user.login, user.password)
@@ -29,6 +30,18 @@ const __authenticateUser = (user) => {
     return Promise.resolve(user);
 };
 
+const __createUser = (user) => {
+    return db.models.user.create(user);
+};
+
+const __sendEmail = (user) => {
+    return mailer.sendInvitationEmail(user)
+        .then(info => {
+            console.log(info);
+            return user;
+        });
+};
+
 module.exports = {
     activate(req, res) {
         if (!req.body.email) {
@@ -41,10 +54,14 @@ module.exports = {
                     res.status(409).send({error: messages.BAD_LOGIN});
                 });
         } else {
-            res.json({
-                login: 'OK',
-                token: 'OK'
-            });
+            Promise.resolve()
+                .then(() => __createUser(req.body))
+                // .then(user => __sendEmail(user))
+                .then(data => res.json(data))
+                .catch(error => {
+                    console.log(error);
+                    res.status(409).send({error: messages.BAD_LOGIN});
+                });
         }
     },
     get(req, res) {

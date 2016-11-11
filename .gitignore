@@ -85,3 +85,6 @@ fabric.properties
 
 # Webpack ouput
 www/bundle.js
+
+# Project hidden files
+backend/utils/connectionString.txt
