@@ -40,7 +40,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         login: DataTypes.STRING,
         password: DataTypes.STRING,
-        email: DataTypes.STRING,
+        email: {
+            type: DataTypes.STRING,
+            unique: true
+        },
         active: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
