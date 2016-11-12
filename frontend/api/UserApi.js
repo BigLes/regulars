@@ -8,7 +8,7 @@ const url = 'http://localhost:3003/api/users';
 
 const UserApi = {
 
-    login: (user) => {
+    activate: (user) => {
         //TODO: validate user properties
         const path = url;
         return fetch(path, {
@@ -20,8 +20,6 @@ const UserApi = {
             }
         }).then(res => res.json());
     },
-
-    create: (user) => {},
 
     update: (user) => {},
 
