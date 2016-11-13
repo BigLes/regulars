@@ -109,9 +109,7 @@ module.exports = {
         Promise.resolve()
             .then(() => __verifyToken(req.query.token))
             .then(user => __activateUser(user))
-            .then(user => {
-                res.json({ok: "ok"});
-            })
+            .then(user => res.redirect('/'))
             .catch(error => {
                 console.log(error);
                 res.status(409).send(messages[error] ? {error: messages[error]} : {error: messages.BAD_TOKEN});
