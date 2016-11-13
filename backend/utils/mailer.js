@@ -5,6 +5,7 @@
 
 const nodemailer    = require('nodemailer');
 const fs            = require('fs');
+const config        = require('config');
 
 const transporter = nodemailer.createTransport(JSON.parse(fs.readFileSync('backend/utils/connectionString.txt').toString()));
 
@@ -15,8 +16,9 @@ module.exports = {
             from: '"Regular Expressions Puzzle" <regular.expressions.puzzle@gmail.com>',
             to: user.email,
             subject: 'Welcome',
-            text: 'Hello world ?',
-            html: '<b>Hello world ?</b>'
+            //TODO: add functionality to re-send email
+            text: `Hello, ${user.login}! To activate your profile, please use this link (valid 30 days): ${config.server.url + '/activate?token=' + user.token}`,
+            html: `<b>Hello, ${user.login}!</b><br /><p>To activate your profile, please use this link (valid 30 days): <a href="${config.server.url + '/activate?token=' + user.token}">activation</a></p>`
         };
 
         return new Promise((resolve, reject) => {

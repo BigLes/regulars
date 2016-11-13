@@ -31,7 +31,8 @@ const __authenticateUser = (user) => {
 };
 
 const __createUser = (user) => {
-    return db.models.user.create(user);
+    return db.models.user.create(user)
+        .then(user => user.dataValues);
 };
 
 const __sendEmail = (user) => {
@@ -56,6 +57,7 @@ module.exports = {
         } else {
             Promise.resolve()
                 .then(() => __createUser(req.body))
+                .then(user => __authenticateUser(user))
                 .then(user => __sendEmail(user))
                 .then(data => res.json(data))
                 .catch(error => {

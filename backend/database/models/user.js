@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         updatedAt: {
             type: DataTypes.DATE
         },
+        //TODO: add uniqueness of login
         login: DataTypes.STRING,
         password: DataTypes.STRING,
         email: {
