@@ -13,11 +13,7 @@ const UserActions = {
     login(user) {
         //TODO: add error handling
         UserApi.activate(user)
-            .then(res => {
-                Dispatcher.dispatch({actionType: Constants.LOGIN_DONE, res});
-                //TODO: create separate component for fetching and move turnOff to one place
-                LoaderActions.turnOff();
-            })
+            .then(res => Dispatcher.dispatch({actionType: Constants.LOGIN_DONE, res}))
     },
 
     save() {},
