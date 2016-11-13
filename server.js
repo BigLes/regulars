@@ -11,7 +11,9 @@ const DB            = require('./backend/database/DataBase');
 const webpackConfig = require('./webpack.config.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
+//TODO: add error page
 const userRoutes    = require('./backend/routes/userRoutes');
+const generalRoutes = require('./backend/routes/generalRoutes');
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -37,6 +39,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use('/api', userRoutes);
+app.use('/', generalRoutes);
 
 const __createDB = () => {
     return DB.applyMigrations();

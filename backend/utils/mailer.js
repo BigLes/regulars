@@ -17,8 +17,8 @@ module.exports = {
             to: user.email,
             subject: 'Welcome',
             //TODO: add functionality to re-send email
-            text: `Hello, ${user.login}! To activate your profile, please use this link (valid 30 days): ${config.server.url + '/activate?token=' + user.token}`,
-            html: `<b>Hello, ${user.login}!</b><br /><p>To activate your profile, please use this link (valid 30 days): <a href="${config.server.url + '/activate?token=' + user.token}">activation</a></p>`
+            text: `Hello, ${user.login}! To verify your email, please use this link (valid 30 days): ${config.server.url + '/verify?token=' + user.token}`,
+            html: `<b>Hello, ${user.login}!</b><br /><p>To verify your email, please use this link (valid 30 days): <a href="${config.server.url + '/verify?token=' + user.token}">activation</a></p>`
         };
 
         return new Promise((resolve, reject) => {
