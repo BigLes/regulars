@@ -12,9 +12,7 @@ const mailer    = require('../utils/mailer');
 
 const __identifyUser = (user) => {
     return __findUser(user.login, user.password)
-        .then(user => {
-            return user ? user.dataValues : Promise.reject();
-        });
+        .then(user => user ? Promise.resolve(user.dataValues) : Promise.reject());
 };
 
 const __findUser = (login, password) => {

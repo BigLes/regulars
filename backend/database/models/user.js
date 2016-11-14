@@ -19,9 +19,11 @@ const __encryptUser = user => {
 };
 
 const __decryptUser = data => {
-    if (data.login)     data.login = hash.decrypt(data.login);
-    if (data.password)  data.password = hash.decrypt(data.password);
-    if (data.email)     data.email = hash.decrypt(data.email);
+    if (data) {
+        if (data.login)     data.login = hash.decrypt(data.login);
+        if (data.password)  data.password = hash.decrypt(data.password);
+        if (data.email)     data.email = hash.decrypt(data.email);
+    }
     return data;
 };
 
