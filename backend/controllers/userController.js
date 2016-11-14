@@ -79,7 +79,7 @@ module.exports = {
                 .then(data => res.json(data))
                 .catch(error => {
                     console.log(error);
-                    res.status(409).send(messages[error] ? {error: messages[error]} : {error: messages.BAD_EMAIL});
+                    res.status(409).send(messages[error] ? {error: messages[error]} : {error: messages.BAD_LOGIN});
                 });
         } else {
             Promise.resolve()
