@@ -14,7 +14,8 @@ export default StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.15)',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '-26px'
+        marginTop: '-26px',
+        display: 'flex'
     },
     svg: {
         width: '100px',

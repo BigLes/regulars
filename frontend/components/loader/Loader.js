@@ -18,8 +18,8 @@ class Loader extends React.Component {
     }
 
     render() {
-        return (
-            <div className={classNames(css(style.loader))} style={{display: this.state.display}}>
+        return !this.state.display ? null : (
+            <div className={classNames(css(style.loader))}>
                 <svg className={classNames(css(style.svg))}>
                     <path
                         fill="rgba(0, 0, 0, .15)"
