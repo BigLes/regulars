@@ -3,15 +3,14 @@
  */
 'use strict';
 
-import LoaderActions from '../actions/LoaderActions';
+import LoaderActions    from '../actions/LoaderActions';
 
 export default function (url, options) {
     return fetch(url, options).then(res => {
         LoaderActions.turnOff();
         if (res.status !== 200) {
-            //TODO: add error popup and show proper message
-            Promise.reject();
+            return res.json().then(json => Promise.reject(json));
         }
-        return Promise.resolve(res.json());
+        return res.json().then(json => Promise.resolve(json));
     })
 }

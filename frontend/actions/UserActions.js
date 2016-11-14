@@ -6,14 +6,14 @@
 import UserApi          from '../api/UserApi';
 import Constants        from '../constants/Constants';
 import Dispatcher       from '../dispatcher/Dispatcher';
-import LoaderActions    from './LoaderActions';
+import PopupActions     from '../actions/PopupActions';
 
 const UserActions = {
 
     login(user) {
-        //TODO: add error handling
         UserApi.activate(user)
             .then(res => Dispatcher.dispatch({actionType: Constants.LOGIN_DONE, res}))
+            .catch(res => PopupActions.addBadMessage(res.error));
     },
 
     save() {},

@@ -6,14 +6,16 @@
 import React    from 'react';
 import Header   from '../../components/header/Header';
 import Loader   from '../../components/loader/Loader';
+import Popup    from '../../components/popup/Popup';
 
 const ListPage = React.createClass({
     render() {
         return (
             <div>
-                <Header></Header>
+                <Header/>
                 <main>
-                    <Loader></Loader>
+                    <Loader/>
+                    <Popup/>
                 </main>
             </div>
         );
