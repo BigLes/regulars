@@ -13,9 +13,9 @@ export default StyleSheet.create({
         right: 0
     },
     message: {
-        float: 'right',
         padding: '10px',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        margin: '0 5px 10px 0'
     },
     good: {
         boxShadow: `0 0 5px ${constants.green}`
