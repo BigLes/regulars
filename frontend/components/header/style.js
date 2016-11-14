@@ -11,7 +11,6 @@ export default StyleSheet.create({
         fontSize: 'larger',
         borderBottom: `1px solid ${constants.lightGrey}`,
         height: '25px',
-        color: constants.darkGrey,
         textAlign: 'center',
         userSelect: 'none',
         position: 'absolute',

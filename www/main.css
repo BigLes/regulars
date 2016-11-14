@@ -4,6 +4,10 @@ html, body, #mount, #mount > div, main {
     height: 100%;
 }
 
+body {
+    color: #949494;
+}
+
 * {
     outline: 0;
     font-family: 'Open Sans Condensed', sans-serif;
