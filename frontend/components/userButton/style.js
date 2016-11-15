@@ -43,6 +43,9 @@ export default StyleSheet.create({
         borderColor: constants.red
     },
     pointer: {
-        cursor: 'pointer'
+        cursor: 'pointer',
+        display: 'block',
+        marginTop: '4px',
+        fontSize: 'large'
     }
 });
