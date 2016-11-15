@@ -22,10 +22,21 @@ const __findUser = (login, password) => {
     })
 };
 
-const __authenticateUser = (user) => {
+/**
+ * Authenticates user - adds token
+ * @param {Object} user User object
+ * @param {boolean} [shouldExpire] True, if token should expire
+ * @returns {Promise.<T>}
+ * @private
+ */
+const __authenticateUser = (user, shouldExpire) => {
     let fakeUser = Object.assign({}, user);
+    let options = Object.assign({}, config.jwt);
+    if (!shouldExpire) {
+        delete options.expiresIn;
+    }
     delete fakeUser.email;
-    user.token = jwt.sign(fakeUser, config.jwtSecret, config.jwt);
+    user.token = jwt.sign(fakeUser, config.jwtSecret, options);
     return Promise.resolve(user);
 };
 
@@ -75,7 +86,7 @@ module.exports = {
             Promise.resolve()
                 .then(() => __identifyUser(req.body))
                 .then(user => __filterUser(user))
-                .then(user => __authenticateUser(user))
+                .then(user => __authenticateUser(user, true))
                 .then(data => res.json(data))
                 .catch(error => {
                     console.log(error);
