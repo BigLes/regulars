@@ -32,7 +32,7 @@ class UserButton extends React.Component {
     render() {
         return (
             <div className={classNames(css(style.userButton, this.state.active ? style.active : ''), this.props.className)}>
-                <div onClick={this.toggle.bind(this)} className={classNames("fa fa-user-o", css(style.pointer))}></div>
+                <div onClick={() => this.toggle()} className={classNames("fa fa-user-o", css(style.pointer))}></div>
                 {this.state.active ? this.renderLoginForm() : null}
             </div>
         );
@@ -65,12 +65,12 @@ class UserButton extends React.Component {
     renderLoginForm() {
         return (
             <div className={classNames(css(style.loginForm))}>
-                <input onClick={this.toggleLoginType.bind(this)} className={classNames(css(style.input, style.button))} name="type" type="button" value={this.state.login ? 'LOGIN' : 'SIGNUP'} />
-                <input onChange={this.fieldChange.bind(this)} className={classNames(css(style.input, !this.state.user.login ? null :this.props.rules.login.test(this.state.user.login) ? style.good : style.bad))} name="login" type="text" placeholder="Login" value={this.state.user.login} />
-                {!this.state.login ? <input onChange={this.fieldChange.bind(this)} className={classNames(css(style.input, !this.state.user.email ? null :this.props.rules.email.test(this.state.user.email) ? style.good : style.bad))} name="email" type="text" placeholder="Email" value={this.state.user.email} /> : null}
-                <input onChange={this.fieldChange.bind(this)} className={classNames(css(style.input, !this.state.user.password ? null : this.props.rules.password.test(this.state.user.password) ? style.good : style.bad))} name="password" type="password" placeholder="Password" value={this.state.user.password} />
-                {!this.state.login ? <input onChange={this.fieldChange.bind(this)} className={this.passwordClassNames.call(this)} name="password2" type="password" placeholder="Re-Password" value={this.state.user.password2} /> : null}
-                <input onClick={this.activateUser.bind(this)} className={classNames(css(style.input, style.button))} name="type" type="button" value="SUBMIT" />
+                <input onClick={e => this.toggleLoginType(e)} className={classNames(css(style.input, style.button))} name="type" type="button" value={this.state.login ? 'LOGIN' : 'SIGNUP'} />
+                <input onChange={e => this.fieldChange(e)} className={classNames(css(style.input, !this.state.user.login ? null :this.props.rules.login.test(this.state.user.login) ? style.good : style.bad))} name="login" type="text" placeholder="Login" value={this.state.user.login} />
+                {!this.state.login ? <input onChange={e => this.fieldChange(e)} className={classNames(css(style.input, !this.state.user.email ? null :this.props.rules.email.test(this.state.user.email) ? style.good : style.bad))} name="email" type="text" placeholder="Email" value={this.state.user.email} /> : null}
+                <input onChange={e => this.fieldChange(e)} className={classNames(css(style.input, !this.state.user.password ? null : this.props.rules.password.test(this.state.user.password) ? style.good : style.bad))} name="password" type="password" placeholder="Password" value={this.state.user.password} />
+                {!this.state.login ? <input onChange={e => this.fieldChange(e)} className={this.passwordClassNames.call(this)} name="password2" type="password" placeholder="Re-Password" value={this.state.user.password2} /> : null}
+                <input onClick={e => this.activateUser(e)} className={classNames(css(style.input, style.button))} name="type" type="button" value="SUBMIT" />
             </div>
         )
     }

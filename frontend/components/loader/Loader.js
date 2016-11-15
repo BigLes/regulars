@@ -31,7 +31,7 @@ class Loader extends React.Component {
     }
 
     componentDidMount() {
-        LoaderStore.addListener(this.__onChange.bind(this));
+        LoaderStore.addListener(() => this.__onChange());
     }
 
     __onChange() {

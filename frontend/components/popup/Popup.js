@@ -39,7 +39,7 @@ class Popup extends React.Component {
     }
 
     componentDidMount() {
-        PopupStore.addListener(this.__onChange.bind(this));
+        PopupStore.addListener(() => this.__onChange());
     }
 
     __onChange() {
