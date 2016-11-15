@@ -7,18 +7,26 @@ const config    = require('config');
 const jwt       = require('jsonwebtoken');
 const db        = require('../database/DataBase');
 const messages  = require('../constants/messages');
-const hash      = require('../utils/hash');
 const mailer    = require('../utils/mailer');
+const EHandler  = require('../utils/ErrorHandler');
 
 const __identifyUser = (user) => {
-    return __findUser(user.login, user.password)
-        .then(user => user ? Promise.resolve(user.dataValues) : Promise.reject());
+    return __findUser(user.login, user.password);
 };
 
 const __findUser = (login, password) => {
     return db.models.user.findOne({
-        attributes: ['id', 'login', 'password', 'admin'],
-        where: {login, password, active: true}
+        attributes: ['id', 'login', 'admin', 'active'],
+        where: {login, password}
+    }).then(user => {
+        if (!user) {
+            return Promise.reject(messages.BAD_LOGIN);
+        }
+        if (!user.active) {
+            return Promise.reject(messages.NOT_ACTIVE);
+        }
+        delete user.active;
+        return Promise.resolve(user);
     })
 };
 
@@ -88,10 +96,7 @@ module.exports = {
                 .then(user => __filterUser(user))
                 .then(user => __authenticateUser(user, true))
                 .then(data => res.json(data))
-                .catch(error => {
-                    console.log(error);
-                    res.status(409).send(messages[error] ? {error: messages[error]} : {error: messages.BAD_LOGIN});
-                });
+                .catch(error => EHandler.sendConflict(error, res));
         } else {
             Promise.resolve()
                 .then(() => __createUser(req.body))
@@ -99,10 +104,7 @@ module.exports = {
                 .then(user => __authenticateUser(user))
                 .then(user => __sendEmail(user))
                 .then(data => res.json(data))
-                .catch(error => {
-                    console.log(error);
-                    res.status(409).send(messages[error] ? {error: messages[error]} : {error: messages.BAD_EMAIL});
-                });
+                .catch(error => EHandler.sendConflict(error, res));
         }
     },
     get(req, res) {
@@ -120,8 +122,8 @@ module.exports = {
             .then(user => __activateUser(user))
             .then(user => res.redirect('/'))
             .catch(error => {
-                console.log(error);
-                res.status(409).send(messages[error] ? {error: messages[error]} : {error: messages.BAD_TOKEN});
+                console.error(error);
+                res.redirect('/');
             });
     }
 };
