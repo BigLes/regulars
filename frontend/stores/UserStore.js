@@ -4,7 +4,7 @@
 'use strict';
 
 import Dispatcher   from '../dispatcher/Dispatcher';
-import Constants    from '../constants/constants';
+import Constants    from '../constants/Constants';
 import {Store} from 'flux/utils';
 
 let __currentUser;
@@ -19,6 +19,10 @@ class UserStore extends Store {
         }
         this.__emitChange();
     }
+
+    getCurrentUser() {
+        return __currentUser;
+    }
 }
 
-export default UserStore;
+export default new UserStore(Dispatcher);

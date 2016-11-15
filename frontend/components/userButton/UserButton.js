@@ -9,6 +9,7 @@ import {css}                from 'aphrodite';
 import classNames           from 'classnames';
 import LoaderActions        from '../../actions/LoaderActions';
 import UserActions          from '../../actions/UserActions';
+import UserStore            from '../../stores/UserStore';
 
 const __emptyUser = () => {
     return {
@@ -25,20 +26,40 @@ class UserButton extends React.Component {
         this.state = {
             active: false,
             login: true,
+            user: __emptyUser(),
+            currentUser: UserStore.getCurrentUser()
         };
-        this.state.user = __emptyUser();
+    }
+
+    componentDidMount() {
+        UserStore.addListener(() => this.__onUserStoreChange());
+    }
+
+    __onUserStoreChange() {
+        this.setState(Object.assign(this.state, {currentUser: UserStore.getCurrentUser()}));
     }
 
     render() {
         return (
             <div className={classNames(css(style.userButton, this.state.active ? style.active : ''), this.props.className)}>
-                <div onClick={() => this.toggle()} className={classNames("fa fa-user-o", css(style.pointer))}></div>
-                {this.state.active ? this.renderLoginForm() : null}
+                <div onClick={() => this.__toggle()} className={classNames("fa fa-user-o", css(style.pointer))}></div>
+                {this.state.active ? this.__renderUserActions() : null}
             </div>
         );
     }
 
-    toggle() {
+    __renderUserActions() {
+        if (this.state.currentUser) {
+            return this.__renderMenu();
+        }
+        return this.__renderLoginForm();
+    }
+
+    __renderMenu() {
+        return (<div>{this.state.currentUser.login}</div>);
+    }
+
+    __toggle() {
         this.setState(Object.assign(this.state, {active: !this.state.active}));
     }
 
@@ -47,11 +68,11 @@ class UserButton extends React.Component {
         const user = this.state.user;
         if (rules.login.test(user.login) && rules.password.test(user.password)) {
             if (this.state.login) {
-                this.toggle();
+                this.__toggle();
                 LoaderActions.turnOn();
                 UserActions.login({login: this.state.user.login, password: this.state.user.password});
             } else if (rules.email.test(user.email) && rules.password.test(user.password2) && (user.password === user.password2)) {
-                this.toggle();
+                this.__toggle();
                 LoaderActions.turnOn();
                 UserActions.login(this.state.user);
             } else {
@@ -62,7 +83,7 @@ class UserButton extends React.Component {
         }
     }
 
-    renderLoginForm() {
+    __renderLoginForm() {
         return (
             <div className={classNames(css(style.loginForm))}>
                 <input onClick={e => this.toggleLoginType(e)} className={classNames(css(style.input, style.button))} name="type" type="button" value={this.state.login ? 'LOGIN' : 'SIGNUP'} />
