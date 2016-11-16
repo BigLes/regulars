@@ -14,7 +14,6 @@ export default StyleSheet.create({
     },
     message: {
         padding: '10px',
-        borderRadius: '5px',
         margin: '0 5px 10px 0'
     },
     good: {
