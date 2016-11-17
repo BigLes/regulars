@@ -127,12 +127,11 @@ UserButton.propTypes = {
     className: PropTypes.string
 };
 
-//TODO: change password regexp
 UserButton.defaultProps = {
     rules: {
-        login: new RegExp('[\\w]{3,25}'),
+        login: new RegExp('^[a-zA-Z0-9_-]{4,16}$'),
         email: new RegExp('^[-a-z0-9~!$%^&*_=+}{\\\'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\\'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})?$'),
-        password: new RegExp('[\\w]{3,25}')
+        password: new RegExp('^[a-zA-Z0-9_\!@#$%^&+=-]{4,16}$')
     }
 };
 
