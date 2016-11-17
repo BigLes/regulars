@@ -6,7 +6,7 @@
 import fetch    from '../utils/fetch';
 import config   from 'config';
 
-const url = config.apiUrl + 'users';
+const url = config.apiUrl + 'users/';
 
 const UserApi = {
 
