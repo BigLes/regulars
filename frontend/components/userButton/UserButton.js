@@ -7,6 +7,7 @@ import React, {PropTypes}   from 'react';
 import style                from './style'
 import {css}                from 'aphrodite';
 import classNames           from 'classnames';
+import config               from 'config';
 import LoaderActions        from '../../actions/LoaderActions';
 import PopupActions         from '../../actions/PopupActions';
 import UserActions          from '../../actions/UserActions';
@@ -129,9 +130,9 @@ UserButton.propTypes = {
 
 UserButton.defaultProps = {
     rules: {
-        login: new RegExp('^[a-zA-Z0-9_-]{4,16}$'),
-        email: new RegExp('^[-a-z0-9~!$%^&*_=+}{\\\'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\\'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})?$'),
-        password: new RegExp('^[a-zA-Z0-9_\!@#$%^&+=-]{4,16}$')
+        login: new RegExp(config.rules.login),
+        email: new RegExp(config.rules.email),
+        password: new RegExp(config.rules.password)
     }
 };
 

@@ -3,12 +3,21 @@
  */
 'use strict';
 
-const router = require('express').Router();
-const userController = require('../controllers/userController');
+const Joi               = require('joi');
+const router            = require('express').Router();
+const config            = require('config');
+const validate          = require('express-validation');
+const userController    = require('../controllers/userController');
 
 router.route('/users')
     .get(userController.get)
-    .post(userController.activate);
+    .post(validate({
+        body: {
+            login: Joi.string().regex(new RegExp(config.rules.login)).required(),
+            email: Joi.string().regex(new RegExp(config.rules.email)),
+            password: Joi.string().regex(new RegExp(config.rules.password)).required()
+        }
+    }), userController.activate);
 
 router.route('/users/:id')
     .get(userController.get)

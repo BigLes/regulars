@@ -11,7 +11,6 @@ const url = config.apiUrl + 'users';
 const UserApi = {
 
     activate: (user) => {
-        //TODO: validate user properties
         return fetch(url, {
             method: 'POST',
             body: JSON.stringify(user),

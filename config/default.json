@@ -21,5 +21,10 @@
     "expiresIn": "30 days"
   },
   "jwtSecret": "sp4Vj8vT",
-  "apiUrl": "http://localhost:3003/api/"
+  "apiUrl": "http://localhost:3003/api/",
+  "rules": {
+    "login": "^[a-zA-Z0-9_-]{4,16}$",
+    "email": "^[-a-z0-9~!$%^&*_=+}{\\'?]+(\\.[-a-z0-9~!$%^&*_=+}{\\'?]+)*@([a-z0-9_][-a-z0-9_]*(\\.[-a-z0-9_]+)*\\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,5})?$",
+    "password": "^[a-zA-Z0-9_\\!@#$%^&+=-]{4,16}$"
+  }
 }
