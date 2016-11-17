@@ -19,7 +19,11 @@ router.route('/users')
         }
     }), userController.activate);
 
-router.route('/users/:id')
+router.route('/users/:id', validate({
+    params: {
+        id: Joi.number().required()
+    }
+}))
     .get(userController.get)
     .put(userController.update)
     .delete(userController.delete);
