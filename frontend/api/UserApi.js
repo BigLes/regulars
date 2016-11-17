@@ -3,10 +3,10 @@
  */
 'use strict';
 
-import fetch from '../utils/fetch';
+import fetch    from '../utils/fetch';
+import config   from 'config';
 
-//TODO: move to config
-const url = 'http://localhost:3003/api/users';
+const url = config.apiUrl + 'users';
 
 const UserApi = {
 

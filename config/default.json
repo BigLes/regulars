@@ -20,5 +20,6 @@
     "algorithm": "HS256",
     "expiresIn": "30 days"
   },
-  "jwtSecret": "sp4Vj8vT"
+  "jwtSecret": "sp4Vj8vT",
+  "apiUrl": "http://localhost:3003/api/"
 }
