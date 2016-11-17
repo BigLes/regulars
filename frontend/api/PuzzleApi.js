@@ -9,6 +9,7 @@ import config   from 'config';
 const url = config.apiUrl + 'puzzles/';
 
 const PuzzleApi = {
+
     get: () => {
         return fetch(url, {
             method: 'GET',
