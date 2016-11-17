@@ -8,6 +8,7 @@ import style                from './style'
 import {css}                from 'aphrodite';
 import classNames           from 'classnames';
 import LoaderActions        from '../../actions/LoaderActions';
+import PopupActions         from '../../actions/PopupActions';
 import UserActions          from '../../actions/UserActions';
 import UserStore            from '../../stores/UserStore';
 
@@ -76,10 +77,10 @@ class UserButton extends React.Component {
                 LoaderActions.turnOn();
                 UserActions.login(this.state.user);
             } else {
-                //TODO: show error
+                PopupActions.addBadMessage('Your email or password doesn\'t fit requirements');
             }
         } else {
-            //TODO: show error
+            PopupActions.addBadMessage('Your login or password doesn\'t fit requirements');
         }
     }
 
