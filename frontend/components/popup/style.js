@@ -14,7 +14,9 @@ export default StyleSheet.create({
     },
     message: {
         padding: '10px',
-        margin: '0 5px 10px 0'
+        margin: '0 5px 10px 0',
+        userSelect: 'none',
+        backgroundColor: 'white'
     },
     good: {
         boxShadow: `0 0 5px ${constants.green}`
