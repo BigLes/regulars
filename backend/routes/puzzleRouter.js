@@ -4,13 +4,31 @@
 'use strict';
 
 const Joi               = require('joi');
+const jwt               = require('jsonwebtoken');
+const config            = require('config');
 const router            = require('express').Router();
 const validate          = require('express-validation');
+const EHandler          = require('../utils/ErrorHandler');
 const puzzleController  = require('../controllers/puzzleController');
+
+const validation = (token) => {
+    try {
+        return jwt.verify(token, config.jwtSecret, config.jwt);
+    } catch (error) {
+        return error;
+    }
+};
+
+const auth = (req, res, next) => {
+    if (validation(req.header('Authorization'))) {
+        return next();
+    }
+    return EHandler.sendUnauthorized({}, res);
+};
 
 router.route('/puzzles')
     .get(puzzleController.get)
-    .post(puzzleController.create);
+    .post(auth, puzzleController.create);
 
 router.route('/puzzles/:id', validate({
     params: {
@@ -18,7 +36,7 @@ router.route('/puzzles/:id', validate({
     }
 }))
     .get(puzzleController.get)
-    .put(puzzleController.update)
-    .delete(puzzleController.delete);
+    .put(auth, puzzleController.update)
+    .delete(auth, puzzleController.delete);
 
 module.exports = router;
