@@ -11,5 +11,6 @@ export default {
     green: '#00ab00',
     blue: '#2a61ff',
     cellHeight: '46px',
-    cellWidth: '40px'
+    cellWidth: '40px',
+    topShift: '-11px'
 };

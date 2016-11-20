@@ -5,5 +5,6 @@
 
 export default {
     cellHeight: 46,
-    cellWidth: 40
+    cellWidth: 40,
+    topShift: 11
 };

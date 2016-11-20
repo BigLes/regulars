@@ -47,7 +47,7 @@ class Cell extends React.Component {
 }
 
 Cell.propTypes = {
-    onChange: PropTypes.func
+    onChange: PropTypes.func.isRequired
 };
 
 export default Cell;

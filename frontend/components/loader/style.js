@@ -11,11 +11,12 @@ export default StyleSheet.create({
         width: '100%',
         textAlign: 'center',
         userSelect: 'none',
-        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        backgroundColor: 'rgba(255, 255, 255, 1)',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '-26px',
-        display: 'flex'
+        display: 'flex',
+        position: 'absolute',
+        marginTop: '-26px'
     },
     svg: {
         width: '100px',
