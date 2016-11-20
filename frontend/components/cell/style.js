@@ -24,7 +24,8 @@ export default StyleSheet.create({
         left: '6px',
         padding: 0,
         textAlign: 'center',
-        fontSize: '40px'
+        fontSize: '40px',
+        cursor: 'pointer'
     },
     cell: {
         position: 'relative',
