@@ -8,6 +8,7 @@ import style        from './style'
 import {css}        from 'aphrodite';
 import classNames   from 'classnames';
 import shortid      from 'shortid';
+import Cell         from '../cell/Cell';
 
 class Puzzle extends React.Component {
     constructor(props) {
@@ -16,7 +17,12 @@ class Puzzle extends React.Component {
     }
 
     render() {
-        return (<div></div>);
+        return (<div>
+            <Cell></Cell>
+            <Cell></Cell>
+            <Cell></Cell>
+            <Cell></Cell>
+        </div>);
     }
 }
 

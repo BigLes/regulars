@@ -9,5 +9,7 @@ export default {
     white: '#ffffff',
     red: '#fd0000',
     green: '#00ab00',
-    blue: '#2a61ff'
+    blue: '#2a61ff',
+    cellHeight: '46px',
+    cellWidth: '40px'
 };

@@ -4,6 +4,11 @@ html, body, #mount, #mount > div, main {
     height: 100%;
 }
 
+main {
+    padding-top: 26px;
+    box-sizing: border-box;
+}
+
 body {
     color: #949494;
 }

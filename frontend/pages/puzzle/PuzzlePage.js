@@ -7,6 +7,7 @@ import React    from 'react';
 import Header   from '../../components/header/Header';
 import Loader   from '../../components/loader/Loader';
 import Popup    from '../../components/popup/Popup';
+import Puzzle   from '../../components/puzzle/Puzzle';
 
 const ListPage = React.createClass({
     render() {
@@ -16,6 +17,7 @@ const ListPage = React.createClass({
                 <main>
                     <Loader/>
                     <Popup/>
+                    <Puzzle/>
                 </main>
             </div>
         );
