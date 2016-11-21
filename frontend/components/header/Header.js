@@ -9,7 +9,7 @@ import {css}        from 'aphrodite';
 import UserButton   from '../userButton/UserButton';
 import classNames   from 'classnames';
 
-const Header = React.createClass({
+class Header extends React.Component{
     render() {
         return (
             <header className={classNames(css(style.header))}>
@@ -21,6 +21,10 @@ const Header = React.createClass({
             </header>
         );
     }
-});
+    
+    shouldComponentUpdate() {
+        return false;
+    }
+};
 
 export default Header;
