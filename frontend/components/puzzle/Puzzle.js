@@ -51,6 +51,7 @@ class Puzzle extends React.Component {
 
         for (let i = 0; i < size; i++) {
             //TODO: make proper y, z values
+            //TODO: add proper key - it should not be generated automaticaly
             cells.push(<Cell key={shortid.generate()} onChange={value => this.__onCellChange(value, index, 0, 0)}/>);
         }
 
