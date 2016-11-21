@@ -35,6 +35,7 @@ class Popup extends React.Component {
     }
 
     __renderMessage(message) {
+        //TODO: add proper key - it should not be generated automaticaly
         return (<div key={shortid.generate()} className={classNames(css(style.message, message.good ? style.good : style.bad))}>{message.text}</div>);
     }
 
