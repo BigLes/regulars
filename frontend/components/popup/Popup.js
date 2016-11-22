@@ -8,7 +8,6 @@ import style        from './style'
 import {css}        from 'aphrodite';
 import classNames   from 'classnames';
 import PopupStore   from '../../stores/PopupStore';
-import shortid      from 'shortid';
 
 class Popup extends React.Component {
     constructor(props) {
@@ -36,7 +35,7 @@ class Popup extends React.Component {
 
     __renderMessage(message) {
         //TODO: add proper key - it should not be generated automaticaly
-        return (<div key={shortid.generate()} className={classNames(css(style.message, message.good ? style.good : style.bad))}>{message.text}</div>);
+        return (<div key={message.key} className={classNames(css(style.message, message.good ? style.good : style.bad))}>{message.text}</div>);
     }
 
     componentDidMount() {
