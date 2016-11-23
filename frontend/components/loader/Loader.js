@@ -35,7 +35,7 @@ class Loader extends React.Component {
     }
 
     __onChange() {
-        this.setState(Object.assign(this.state, {display: LoaderStore.getValue()}));
+        this.setState(Object.assign({}, this.state, {display: LoaderStore.getValue()}));
     }
 }
 
