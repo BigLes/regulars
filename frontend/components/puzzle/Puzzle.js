@@ -39,7 +39,7 @@ class Puzzle extends React.Component {
 
     __onSizeChange(e) {
         const size = e.target.value;
-        this.setState(Object.assign(this.state, {size, middleRow: Math.floor(size / 2)}));
+        this.setState(Object.assign({}, this.state, {size, middleRow: Math.floor(size / 2)}));
     }
 
     __drawRow(index) {
