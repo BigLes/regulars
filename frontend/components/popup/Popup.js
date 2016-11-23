@@ -43,7 +43,7 @@ class Popup extends React.Component {
     }
 
     __onChange() {
-        this.setState(Object.assign(this.state, {messages: PopupStore.getMessages()}));
+        this.setState(Object.assign({}, this.state, {messages: PopupStore.getMessages()}));
     }
 }
 
