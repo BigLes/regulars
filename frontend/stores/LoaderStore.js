@@ -15,12 +15,13 @@ class LoaderStore extends Store {
         switch(action.actionType) {
             case Constants.LOADER_ON: {
                 __display = true;
+                this.__emitChange();
             } break;
             case Constants.LOADER_OFF: {
                 __display = false;
+                this.__emitChange();
             } break;
         }
-        this.__emitChange();
     }
 
     getValue() {

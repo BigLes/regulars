@@ -11,7 +11,6 @@ let __puzzles = [];
 
 class PuzzleStore extends Store {
     __onDispatch(action) {
-        this.__emitChange();
     }
 
     getAll() {

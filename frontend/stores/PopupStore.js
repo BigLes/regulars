@@ -16,12 +16,13 @@ class LoaderStore extends Store {
         switch(action.actionType) {
             case Constants.ADD_MESSAGE: {
                 __messages.push(Object.assign(action.res, {key: shortid.generate()}));
+                this.__emitChange();
             } break;
             case Constants.REMOVE_MESSAGE: {
                 __messages.shift();
+                this.__emitChange();
             } break;
         }
-        this.__emitChange();
     }
 
     getMessages() {
