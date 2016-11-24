@@ -65,7 +65,6 @@ class Puzzle extends React.Component {
             const x = index;
             const y = index < middleRow ? i : i + (index - middleRow);
             const z = middleRow + (y - x);
-            //TODO: add proper key - it should not be generated automaticaly
             cells.push(<Cell key={`x${x}y${y}z${z}`} onChange={value => this.__onCellChange(value, x, y, z)}/>);
         }
 
