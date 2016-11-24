@@ -23,6 +23,7 @@ export default StyleSheet.create({
     },
     sizeSelector: {
         position: 'absolute',
-        bottom: 0
+        bottom: 0,
+        left: 0
     }
 });
