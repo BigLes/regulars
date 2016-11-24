@@ -8,6 +8,7 @@ import constants    from '../../constants/styles';
 
 export default StyleSheet.create({
     header: {
+        zIndex: 3,
         fontSize: 'larger',
         borderBottom: `1px solid ${constants.lightGrey}`,
         height: '25px',

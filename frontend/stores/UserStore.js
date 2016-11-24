@@ -14,10 +14,10 @@ class UserStore extends Store {
     __onDispatch(action) {
         switch(action.actionType) {
             case Constants.LOGIN_DONE: {
-                __currentUser = action.res
+                __currentUser = action.res;
+                this.__emitChange();
             } break;
         }
-        this.__emitChange();
     }
 
     getCurrentUser() {

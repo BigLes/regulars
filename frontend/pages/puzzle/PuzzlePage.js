@@ -15,10 +15,10 @@ const ListPage = React.createClass({
             <div>
                 <Header/>
                 <main>
-                    <Loader/>
-                    <Popup/>
                     <Puzzle/>
+                    <Popup/>
                 </main>
+                <Loader/>
             </div>
         );
     }

@@ -7,16 +7,17 @@ import {StyleSheet} from 'aphrodite';
 
 export default StyleSheet.create({
     loader: {
+        display: 'flex',
         height: '100%',
         width: '100%',
-        textAlign: 'center',
-        userSelect: 'none',
-        backgroundColor: 'rgba(255, 255, 255, 1)',
         justifyContent: 'center',
         alignItems: 'center',
-        display: 'flex',
+        textAlign: 'center',
+        userSelect: 'none',
+        backgroundColor: 'rgba(255, 255, 255, 0.75)',
+        zIndex: 4,
         position: 'absolute',
-        marginTop: '-26px'
+        top: 0
     },
     svg: {
         width: '100px',
