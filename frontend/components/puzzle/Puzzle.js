@@ -15,6 +15,7 @@ class Puzzle extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            edit: true,
             size: 5,
             middleRow: 2
         };
@@ -22,7 +23,17 @@ class Puzzle extends React.Component {
     }
 
     render() {
-        return (<div className={classNames(css(style.puzzleContainer))}>{this.__renderPuzzle.call(this)}</div>);
+        return (<div className={classNames(css(style.puzzleContainer))}>
+            {this.__renderSizeSelector.call(this)}
+            {this.__renderPuzzle.call(this)}
+        </div>);
+    }
+
+    __renderSizeSelector() {
+        return !this.state.edit ? null :
+            (<div className={classNames(css(style.sizeSelector))}>
+                <input onChange={e => this.__onSizeChange(e)} min={3} max={13} step={2} value={this.state.size} type="range" />
+            </div>);
     }
 
     __renderPuzzle() {
@@ -44,15 +55,18 @@ class Puzzle extends React.Component {
 
     __drawRow(index) {
         let cells = [];
-        const size = this.state.size - Math.abs(index - this.state.middleRow);
+        const middleRow = this.state.middleRow;
+        const size = this.state.size - Math.abs(index - middleRow);
         const specStyle = {
-            marginLeft: (Math.abs(index - this.state.middleRow) * (values.cellWidth / 2)) + 'px'
+            marginLeft: (Math.abs(index - middleRow) * (values.cellWidth / 2)) + 'px'
         };
 
         for (let i = 0; i < size; i++) {
-            //TODO: make proper y, z values
+            const x = index;
+            const y = index < middleRow ? i : i + (index - middleRow);
+            const z = middleRow + (y - x);
             //TODO: add proper key - it should not be generated automaticaly
-            cells.push(<Cell key={shortid.generate()} onChange={value => this.__onCellChange(value, index, 0, 0)}/>);
+            cells.push(<Cell key={`x${x}y${y}z${z}`} onChange={value => this.__onCellChange(value, x, y, z)}/>);
         }
 
         return (<div style={specStyle} className={classNames(css(style.row))} key={shortid.generate()}>{cells}</div>);

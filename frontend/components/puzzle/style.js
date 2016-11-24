@@ -21,5 +21,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    puzzle: {}
+    sizeSelector: {
+        position: 'absolute',
+        bottom: 0
+    }
 });
