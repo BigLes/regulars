@@ -19,7 +19,7 @@ class Puzzle extends React.Component {
             size: 5,
             middleRow: 2
         };
-        this.drawRow = this.__drawRow.bind(this);
+        this.drawRow = this.__renderRow.bind(this);
     }
 
     render() {
@@ -40,12 +40,14 @@ class Puzzle extends React.Component {
         let rows = [];
         const specStyle = {
             height: (this.state.size * (values.cellHeight - values.topShift) + values.topShift) + 'px',
-            width: (this.state.size * values.cellWidth - this.state.size + 1) + 'px'
+            width: (this.state.size * values.cellWidth - this.state.size + 1) + 'px',
+            minHeight: (this.state.size * (values.cellHeight - values.topShift) + values.topShift) + 'px',
+            minWidth: (this.state.size * values.cellWidth - this.state.size + 1) + 'px'
         };
         for (let i = 0; i < this.state.size; i++) {
             rows.push(this.drawRow(i));
         }
-        return (<div style={specStyle}>{rows}</div>);
+        return (<div className={classNames(css(style.puzzle))} style={specStyle}>{rows}{this.__renderRules.call(this)}</div>);
     }
 
     __onSizeChange(e) {
@@ -53,7 +55,7 @@ class Puzzle extends React.Component {
         this.setState(Object.assign({}, this.state, {size, middleRow: Math.floor(size / 2)}));
     }
 
-    __drawRow(index) {
+    __renderRow(index) {
         let cells = [];
         const middleRow = this.state.middleRow;
         const size = this.state.size - Math.abs(index - middleRow);
@@ -71,6 +73,38 @@ class Puzzle extends React.Component {
         return (<div style={specStyle} className={classNames(css(style.row))} key={shortid.generate()}>{cells}</div>);
     }
 
+    __renderRules() {
+        let rules = [];
+        for (let i = 0; i < this.state.size; i++) {
+            rules.push(this.__renderXRule(i));
+            rules.push(this.__renderYRule(i));
+        }
+        return rules;
+    }
+
+    __renderXRule(i) {
+        const specStyle = {
+            top: (i * (values.cellHeight - values.topShift) + values.topShift) + 'px',
+            left: ((Math.abs(i - this.state.middleRow) * (values.cellWidth / 2)) - values.ruleWidth - 2) + 'px'
+        };
+        return (<input style={specStyle} className={classNames(css(style.rules, style.xRule))} type="text" key={`x${i}`} />);
+    }
+
+    __renderYRule(i) {
+        let specStyle;
+        if (i <= this.state.middleRow) {
+            specStyle = {
+                top: (-52) + 'px',
+                left: (this.state.middleRow * (values.cellWidth / 2) + i * values.cellWidth + 4) + 'px'
+            };
+        } else {
+            specStyle = {
+                top: (-52 + (i - this.state.middleRow) * (values.cellHeight - 10)) + 'px',
+                left: (this.state.middleRow * (values.cellWidth / 2) + i * (values.cellWidth / 2) + values.cellWidth) + 'px'
+            };
+        }
+        return (<input style={specStyle} className={classNames(css(style.rules, style.yRule))} type="text" key={`y${i}`} />);
+    }
 
     __onCellChange(value, x, y, z) {
         console.log(x, y, z, value);

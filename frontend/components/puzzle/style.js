@@ -25,5 +25,18 @@ export default StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         left: 0
+    },
+    puzzle: {
+        position: 'relative'
+    },
+    rules: {
+        position: 'absolute',
+        borderWidth: '1px'
+    },
+    xRule: {
+        borderWidth: '2px'
+    },
+    yRule: {
+        transform: 'rotate(-63deg)'
     }
 });
