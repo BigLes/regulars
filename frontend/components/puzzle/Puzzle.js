@@ -91,6 +91,7 @@ class Puzzle extends React.Component {
     }
 
     __renderYRule(i) {
+        //TODO: works with only size=5
         let specStyle;
         if (i <= this.state.middleRow) {
             specStyle = {
