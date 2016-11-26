@@ -91,7 +91,7 @@ class Puzzle extends React.Component {
     }
 
     __renderYRule(i) {
-        //TODO: works with only size=5
+        //TODO: works with only size=5, problem with left for index > middleRow
         let specStyle;
         if (i <= this.state.middleRow) {
             specStyle = {
