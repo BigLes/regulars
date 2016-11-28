@@ -78,33 +78,51 @@ class Puzzle extends React.Component {
         for (let i = 0; i < this.state.size; i++) {
             rules.push(this.__renderXRule(i));
             rules.push(this.__renderYRule(i));
+            rules.push(this.__renderZRule(i));
         }
         return rules;
     }
 
     __renderXRule(i) {
         const specStyle = {
-            top: (i * (values.cellHeight - values.topShift) + values.topShift) + 'px',
-            left: ((Math.abs(i - this.state.middleRow) * (values.cellWidth / 2)) - values.ruleWidth - 2) + 'px'
+            top: i * (values.cellHeight - values.topShift) + values.topShift + 1,
+            left: (Math.abs(i - this.state.middleRow) * (values.cellWidth / 2)) - values.ruleWidth
         };
         return (<input style={specStyle} className={classNames(css(style.rules, style.xRule))} type="text" key={`x${i}`} />);
     }
 
     __renderYRule(i) {
-        //TODO: works with only size=5, problem with left for index > middleRow
         let specStyle;
         if (i <= this.state.middleRow) {
             specStyle = {
-                top: (-52) + 'px',
-                left: (this.state.middleRow * (values.cellWidth / 2) + i * values.cellWidth + 4) + 'px'
+                top: i * 0.2 - 2,
+                left: (i + 1) * values.cellWidth + (values.cellWidth / 2) * (this.state.size - this.state.middleRow - 2) - (i * 0.6)
             };
         } else {
             specStyle = {
-                top: (-52 + (i - this.state.middleRow) * (values.cellHeight - 10)) + 'px',
-                left: (this.state.middleRow * (values.cellWidth / 2) + i * (values.cellWidth / 2) + values.cellWidth) + 'px'
+                top: (i - this.state.middleRow) * (values.cellHeight - values.topShift) - 2,
+                left: i * values.cellWidth + (this.state.size - i) * (values.cellWidth / 2) - (i * 0.9)
             };
         }
         return (<input style={specStyle} className={classNames(css(style.rules, style.yRule))} type="text" key={`y${i}`} />);
+    }
+
+    __renderZRule(i) {
+        let specStyle;
+        if (i <= this.state.middleRow) {
+            specStyle = {
+                bottom: - 3 - values.topShift,
+                left: (i + 1.5) * values.cellWidth + (values.cellWidth / 2) * (this.state.size - this.state.middleRow - 2) - i,
+                // display: 'none'
+            };
+        } else {
+            specStyle = {
+                top: i * (values.cellHeight - values.topShift) - 2,
+                // left: (i + 1.5) * values.cellWidth + (values.cellWidth / 2) * (this.state.size - this.state.middleRow - 2) - i
+                left: 0
+            };
+        }
+        return (<input style={specStyle} className={classNames(css(style.rules, style.zRule))} type="text" key={`z${i}`} />);
     }
 
     __onCellChange(value, x, y, z) {

@@ -31,12 +31,20 @@ export default StyleSheet.create({
     },
     rules: {
         position: 'absolute',
-        borderWidth: '1px'
+        borderWidth: '1px',
+        borderColor: constants.lightGrey
     },
     xRule: {
-        borderWidth: '2px'
+        borderWidth: '1px',
+        // display: 'none'
     },
     yRule: {
-        transform: 'rotate(-63deg)'
+        transform: 'rotate(-63deg)',
+        transformOrigin: '0 0',
+        // display: 'none'
+    },
+    zRule: {
+        // transform: 'rotate(63deg)',
+        transformOrigin: '0 0'
     }
 });
