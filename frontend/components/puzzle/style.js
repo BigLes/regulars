@@ -44,7 +44,7 @@ export default StyleSheet.create({
         // display: 'none'
     },
     zRule: {
-        // transform: 'rotate(63deg)',
+        transform: 'rotate(63deg)',
         transformOrigin: '0 0'
     }
 });
