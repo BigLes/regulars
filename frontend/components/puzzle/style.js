@@ -45,6 +45,6 @@ export default StyleSheet.create({
     },
     zRule: {
         transform: 'rotate(63deg)',
-        transformOrigin: '0 0'
+        transformOrigin: '0 18px'
     }
 });

@@ -111,15 +111,17 @@ class Puzzle extends React.Component {
         let specStyle;
         if (i <= this.state.middleRow) {
             specStyle = {
-                bottom: - 3 - values.topShift,
-                left: (i + 1.5) * values.cellWidth + (values.cellWidth / 2) * (this.state.size - this.state.middleRow - 2) - i,
-                // display: 'none'
+                bottom: - 5,
+                left: (i + 1) * values.cellWidth + (values.cellWidth / 2) * (this.state.size - this.state.middleRow - 2) - i + 4
             };
         } else {
+            const j = i;
+            i = this.state.size - i + this.state.middleRow;
+            const rowSize = this.state.size - i + this.state.middleRow;
+            const rowShift = i - this.state.middleRow;
             specStyle = {
-                top: i * (values.cellHeight - values.topShift) - 2,
-                // left: (i + 1.5) * values.cellWidth + (values.cellWidth / 2) * (this.state.size - this.state.middleRow - 2) - i
-                left: 0
+                top: i * (values.cellHeight - values.topShift) + values.topShift - 17,
+                left: rowSize * values.cellWidth + rowShift * values.cellWidth / 2 - (j - this.state.middleRow) * 1.7 + 3
             };
         }
         return (<input style={specStyle} className={classNames(css(style.rules, style.zRule))} type="text" key={`z${i}`} />);
