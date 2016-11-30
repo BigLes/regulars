@@ -3,13 +3,24 @@
  */
 'use strict';
 
-import React        from 'react';
-import style        from './style'
-import {css}        from 'aphrodite';
-import classNames   from 'classnames';
-import shortid      from 'shortid';
-import Cell         from '../cell/Cell';
-import values       from '../../constants/values';
+import React            from 'react';
+import style            from './style'
+import {css}            from 'aphrodite';
+import classNames       from 'classnames';
+import shortid          from 'shortid';
+import Cell             from '../cell/Cell';
+import values           from '../../constants/values';
+import PuzzleActions    from '../../actions/PuzzleActions';
+
+const __puzzle = {
+    size: 5,
+    rules: {
+        x: [],
+        y: [],
+        z: []
+    },
+    cells: []
+};
 
 class Puzzle extends React.Component {
     constructor(props) {
@@ -52,7 +63,11 @@ class Puzzle extends React.Component {
 
     __onSizeChange(e) {
         const size = e.target.value;
-        this.setState(Object.assign({}, this.state, {size, middleRow: Math.floor(size / 2)}));
+        __puzzle.size = size;
+        __puzzle.rules.x = __puzzle.rules.x.slice(0, size);
+        __puzzle.rules.y = __puzzle.rules.y.slice(0, size);
+        __puzzle.rules.z = __puzzle.rules.z.slice(0, size);
+        this.setState(Object.assign(this.state, {size, middleRow: Math.floor(size / 2)}));
     }
 
     __renderRow(index) {
