@@ -69,7 +69,7 @@ class UserButton extends React.Component {
     }
 
     __toggle() {
-        this.setState(Object.assign({}, this.state, {active: !this.state.active}));
+        this.setState(Object.assign(this.state, {active: !this.state.active}));
     }
 
     __toggleLoginType() {
@@ -122,7 +122,7 @@ class UserButton extends React.Component {
     }
 
     __onUserStoreChange() {
-        this.setState(Object.assign({}, this.state, {currentUser: UserStore.getCurrentUser()}));
+        this.setState(Object.assign(this.state, {currentUser: UserStore.getCurrentUser()}));
     }
 }
 
