@@ -32,7 +32,8 @@ export default StyleSheet.create({
     rules: {
         position: 'absolute',
         borderWidth: '1px',
-        borderColor: constants.lightGrey
+        borderColor: constants.lightGrey,
+        width: '96px'
     },
     xRule: {
         borderWidth: '1px',
