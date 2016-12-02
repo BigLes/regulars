@@ -12,25 +12,45 @@ import Cell             from '../cell/Cell';
 import values           from '../../constants/values';
 import PuzzleActions    from '../../actions/PuzzleActions';
 
+const __startSize = 5;
+const __startMiddleRow = 2;
 const __puzzle = {
-    size: 5,
+    size: __startSize,
     rules: {
-        x: [],
-        y: [],
-        z: []
+        x: new Array(__startSize),
+        y: new Array(__startSize),
+        z: new Array(__startSize)
     },
-    cells: []
+    cells: null
 };
 
 class Puzzle extends React.Component {
     constructor(props) {
         super(props);
+        __puzzle.cells = this.__createCells(__startSize);
         this.state = {
             edit: true,
-            size: 5,
-            middleRow: 2
+            size: __startSize,
+            middleRow: __startMiddleRow,
+            active: {
+                x: null,
+                y: null,
+                z: null
+            }
         };
         this.drawRow = this.__renderRow.bind(this);
+    }
+
+    __createCells(size) {
+        const cells = [];
+        for (let i = 0; i < size; i++) {
+            const tempArray = [];
+            for(let j = 0; j < size; j++) {
+                tempArray.push(new Array(size));
+            }
+            cells.push(tempArray);
+        }
+        return cells;
     }
 
     render() {
@@ -62,11 +82,12 @@ class Puzzle extends React.Component {
     }
 
     __onSizeChange(e) {
-        const size = e.target.value;
+        const size = parseInt(e.target.value, 10);
         __puzzle.size = size;
         __puzzle.rules.x = __puzzle.rules.x.slice(0, size);
         __puzzle.rules.y = __puzzle.rules.y.slice(0, size);
         __puzzle.rules.z = __puzzle.rules.z.slice(0, size);
+        __puzzle.cells = this.__createCells(size);
         this.setState(Object.assign(this.state, {size, middleRow: Math.floor(size / 2)}));
     }
 
@@ -143,7 +164,7 @@ class Puzzle extends React.Component {
     }
 
     __onCellChange(value, x, y, z) {
-        console.log(x, y, z, value);
+        __puzzle.cells[x][y][z] = value;
     }
 }
 
