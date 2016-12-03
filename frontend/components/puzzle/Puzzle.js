@@ -125,7 +125,7 @@ class Puzzle extends React.Component {
             top: i * (values.cellHeight - values.topShift) + values.topShift + 1,
             left: (Math.abs(i - this.state.middleRow) * (values.cellWidth / 2)) - values.ruleWidth
         };
-        return (<input style={specStyle} className={classNames(css(style.rules, style.xRule))} type="text" key={`x${i}`} />);
+        return (<input onChange={event => this.__onRuleChange(event, i, 'x')} style={specStyle} className={classNames(css(style.rules, style.xRule))} type="text" key={`x${i}`} />);
     }
 
     __renderYRule(i) {
@@ -164,14 +164,34 @@ class Puzzle extends React.Component {
         return (<input style={specStyle} className={classNames(css(style.rules, style.zRule))} type="text" key={`z${i}`} />);
     }
 
+    __onRuleChange(event, index, axis) {
+        __puzzle.rules[axis][index] = event.target.value;
+        switch(axis) {
+            case 'x': {
+                this.__checkXLine(index);
+            } break;
+            case 'y': {
+                this.__checkYLine(index);
+            } break;
+            case 'z': {
+                this.__checkZLine(index);
+            } break;
+        }
+    }
+
     __onCellChange(value, x, y, z) {
         __puzzle.cells[x][y][z] = value;
-        console.log(`x${x}y${y}z${z}`);
         this.__checkXLine(x);
     }
 
     __checkXLine(index) {
-        PuzzleUtil.checkXLine(__puzzle, index);
+        console.log(PuzzleUtil.checkXLine(__puzzle, index));
+    }
+
+    __checkYLine(index) {
+    }
+
+    __checkZLine(index) {
     }
 }
 
