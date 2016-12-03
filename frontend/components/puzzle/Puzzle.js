@@ -11,6 +11,7 @@ import shortid          from 'shortid';
 import Cell             from '../cell/Cell';
 import values           from '../../constants/values';
 import PuzzleActions    from '../../actions/PuzzleActions';
+import PuzzleUtil       from '../../../utils/puzzle';
 
 const __startSize = 5;
 const __startMiddleRow = 2;
@@ -165,6 +166,12 @@ class Puzzle extends React.Component {
 
     __onCellChange(value, x, y, z) {
         __puzzle.cells[x][y][z] = value;
+        console.log(`x${x}y${y}z${z}`);
+        this.__checkXLine(x);
+    }
+
+    __checkXLine(index) {
+        PuzzleUtil.checkXLine(__puzzle, index);
     }
 }
 
