@@ -13,6 +13,11 @@ const Puzzle = {
         const zEnd = middleRow + (x < middleRow ? middleRow : (size - x - 1));
         const length = size - Math.abs(middleRow - x);
         let line = '';
+        let rule = puzzle.rules.x[x] ? new RegExp(puzzle.rules.x[x]) : null;
+
+        if (!rule) {
+            return null;
+        }
 
         for (let y = yStart, z = zStart; y <= yEnd && z <= zEnd; y++, z++) {
             if (!puzzle.cells[x][y][z] || puzzle.cells[x][y][z].length > 1) {
@@ -20,8 +25,12 @@ const Puzzle = {
             }
             line += puzzle.cells[x][y][z];
         }
-        debugger;
-        return (puzzle.rules.x[x] && line.length === length) ? (new RegExp(puzzle.rules.x[x])).test(line) : false;
+
+        if (line.length !== length) {
+            return null;
+        }
+
+        return rule.test(line) && line.match(rule).includes(line);
     }
 };
 
