@@ -141,7 +141,7 @@ class Puzzle extends React.Component {
                 left: i * values.cellWidth + (this.state.size - i) * (values.cellWidth / 2) - (i * 0.9)
             };
         }
-        return (<input style={specStyle} className={classNames(css(style.rules, style.yRule))} type="text" key={`y${i}`} />);
+        return (<input onChange={event => this.__onRuleChange(event, i, 'y')} style={specStyle} className={classNames(css(style.rules, style.yRule))} type="text" key={`y${i}`} />);
     }
 
     __renderZRule(i) {
@@ -161,7 +161,7 @@ class Puzzle extends React.Component {
                 left: rowSize * values.cellWidth + rowShift * values.cellWidth / 2 - (j - this.state.middleRow) * 1.7 + 3
             };
         }
-        return (<input style={specStyle} className={classNames(css(style.rules, style.zRule))} type="text" key={`z${i}`} />);
+        return (<input onChange={event => this.__onRuleChange(event, i, 'z')} style={specStyle} className={classNames(css(style.rules, style.zRule))} type="text" key={`z${i}`} />);
     }
 
     __onRuleChange(event, index, axis) {
@@ -181,7 +181,9 @@ class Puzzle extends React.Component {
 
     __onCellChange(value, x, y, z) {
         __puzzle.cells[x][y][z] = value;
-        this.__checkXLine(x);
+        this.__checkZLine(x);
+        this.__checkZLine(y);
+        this.__checkZLine(z);
     }
 
     __checkXLine(index) {
@@ -189,9 +191,11 @@ class Puzzle extends React.Component {
     }
 
     __checkYLine(index) {
+        console.log(PuzzleUtil.checkYLine(__puzzle, index));
     }
 
     __checkZLine(index) {
+        console.log(PuzzleUtil.checkZLine(__puzzle, index));
     }
 }
 
