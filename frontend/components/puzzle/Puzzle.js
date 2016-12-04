@@ -165,16 +165,15 @@ class Puzzle extends React.Component {
     }
 
     __onRuleChange(event, index, axis) {
-        __puzzle.rules[axis][index] = event.target.value;
         switch(axis) {
             case 'x': {
-                this.__checkXLine(index);
+                __puzzle.rules.x[index] = Object.assign(__puzzle.rules.x[index], {value: event.target.value, solved: this.__checkXLine(index)});
             } break;
             case 'y': {
-                this.__checkYLine(index);
+                __puzzle.rules.y[index] = Object.assign(__puzzle.rules.y[index], {value: event.target.value, solved: this.__checkYLine(index)});
             } break;
             case 'z': {
-                this.__checkZLine(index);
+                __puzzle.rules.z[index] = Object.assign(__puzzle.rules.z[index], {value: event.target.value, solved: this.__checkZLine(index)});
             } break;
         }
     }

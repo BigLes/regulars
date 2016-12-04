@@ -15,7 +15,7 @@ const Puzzle = {
         let line = '';
         let rule = null;
         try {
-            rule = new RegExp(puzzle.rules.x[x]);
+            rule = new RegExp(puzzle.rules.x[x].value);
         } catch(e) {}
 
         if (!rule) {
@@ -47,7 +47,7 @@ const Puzzle = {
         let line = '';
         let rule = null;
         try {
-            rule = new RegExp(puzzle.rules.y[y]);
+            rule = new RegExp(puzzle.rules.y[y].value);
         } catch(e) {}
 
         if (!rule) {
@@ -79,7 +79,7 @@ const Puzzle = {
         let line = '';
         let rule = null;
         try {
-            rule = new RegExp(puzzle.rules.z[z]);
+            rule = new RegExp(puzzle.rules.z[z].value);
         } catch(e) {}
 
         if (!rule) {
