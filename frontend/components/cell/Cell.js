@@ -15,7 +15,8 @@ class Cell extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            value: '',
+            active: true
         }
     }
 
@@ -23,7 +24,7 @@ class Cell extends React.Component {
         return (<div className={classNames(css(style.cell))}>
             <svg className={classNames(css(style.svg))} width={values.cellWidth} height={values.cellHeight}>
                 <path
-                    fill="rgba(255, 255, 255, 1)"
+                    fill={this.state.active ? styles.blue : styles.white}
                     strokeWidth="1"
                     stroke={styles.darkGrey}
                     d="M-2.561393846768158,22.991604205605096 L7.108249224979847,3.4207518186039096 L32.89396206395974,3.4207518186039096 L42.56360210718487,22.991604205605096 L32.89396206395974,42.562456592606885 L7.108249224979847,42.562456592606885 L-2.561393846768158,22.991604205605096 z"
