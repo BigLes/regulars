@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "author": "Oleksandr Lisovyk",
-  "license": "MIT",
+  "license": "GNU AGPLv3",
   "repository": "https://github.com/BigLes/regulars.git",
   "dependencies": {
     "aphrodite": "^1.2.3",
